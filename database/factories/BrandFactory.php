@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Testing\Fakes\Fake;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Brand>
@@ -17,7 +18,8 @@ class BrandFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'name' => fake()->word(),
+            'is_featured' => fake()->boolean()
         ];
     }
 }
