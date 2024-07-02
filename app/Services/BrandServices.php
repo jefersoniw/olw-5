@@ -11,16 +11,13 @@ class BrandServices
 {
   public function list()
   {
-    $brands = Brand::paginate();
-
-    return $brands;
+    return Brand::paginate();
   }
 
   public function store(BrandStoreRequest $request)
   {
     try {
       $brand = Brand::create($request->validated());
-
       return $brand;
     } catch (Exception $error) {
       return [
@@ -34,7 +31,6 @@ class BrandServices
   {
     try {
       $brand->update($request->validated());
-
       return $brand;
     } catch (Exception $error) {
       return [
