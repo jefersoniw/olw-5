@@ -23,7 +23,7 @@ class CategoryStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|max:255|unique:brands',
+            'name' => 'required|string|max:255|unique:categories',
             'is_featured' => 'nullable|boolean'
         ];
     }

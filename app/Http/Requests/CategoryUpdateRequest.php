@@ -23,7 +23,7 @@ class CategoryUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|max:255|unique:brands,name,' . $this->category->id,
+            'name' => 'required|string|max:255|unique:categories,name,' . $this->category->id,
             'is_featured' => 'nullable|boolean'
         ];
     }
