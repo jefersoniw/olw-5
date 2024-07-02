@@ -45,7 +45,7 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(CategoryUpdateRequest $request, Category $category)
+    public function update(CategoryUpdateRequest $request, Category $category): JsonResponse
     {
         Gate::authorize('update', $category);
         return response()->json($this->categoryServices->update($request, $category));
@@ -54,7 +54,7 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Category $category)
+    public function destroy(Category $category): JsonResponse
     {
         Gate::authorize('delete', $category);
         return response()->json($this->categoryServices->delete($category));
