@@ -16,7 +16,6 @@ class CategoryServices
   public function store(CategoryStoreRequest $request)
   {
     try {
-
       $category = Category::create($request->validated());
       return $category;
     } catch (Exception $error) {

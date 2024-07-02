@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Services\CategoryServices;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class CategoryController extends Controller
 {
@@ -19,6 +20,7 @@ class CategoryController extends Controller
      */
     public function index(): JsonResponse
     {
+        Gate::authorize('viewAny', Category::class);
         return response()->json($this->categoryServices->list());
     }
 
@@ -27,6 +29,7 @@ class CategoryController extends Controller
      */
     public function store(CategoryStoreRequest $request): JsonResponse
     {
+        Gate::authorize('create', Category::class);
         return response()->json($this->categoryServices->store($request));
     }
 
@@ -35,6 +38,7 @@ class CategoryController extends Controller
      */
     public function show(Category $category): JsonResponse
     {
+        Gate::authorize('view', $category);
         return response()->json($category);
     }
 
@@ -43,6 +47,7 @@ class CategoryController extends Controller
      */
     public function update(CategoryUpdateRequest $request, Category $category)
     {
+        Gate::authorize('update', $category);
         return response()->json($this->categoryServices->update($request, $category));
     }
 
@@ -51,6 +56,7 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
+        Gate::authorize('delete', $category);
         return response()->json($this->categoryServices->delete($category));
     }
 }
