@@ -31,7 +31,6 @@ class ProductStoreRequest extends FormRequest
             'sku.*.price' => 'required|decimal:2',
             'sku.*.quantity' => 'required|integer|min:1',
             'sku.*.images.*.url' => 'required|file|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-
         ];
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProductStoreRequest;
+use App\Http\Requests\ProductUpdateRequest;
 use App\Models\Product;
 use App\Services\ProductServices;
 use Illuminate\Http\JsonResponse;
@@ -46,9 +47,10 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Product $product)
+    public function update(ProductUpdateRequest $request, Product $product)
     {
-        //
+        Gate::authorize('update', $product);
+        return response()->json($this->productServices->update($request, $product));
     }
 
     /**
@@ -56,6 +58,7 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        Gate::authorize('delete', $product);
+        return response()->json($this->productServices->delete($product));
     }
 }
