@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\RoleEnum;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ProductUpdateRequest extends FormRequest
@@ -11,7 +12,7 @@ class ProductUpdateRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        return auth()->user()->role_id == RoleEnum::ADMIN;
     }
 
     /**
@@ -22,7 +23,14 @@ class ProductUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'brand_id' => 'required',
+            'category_id' => 'required',
+            'name' => 'required|string|max:255',
+            'description' => 'required|string|max:1000',
+            'sku.*.name' => 'required|string|max:255',
+            'sku.*.price' => 'required|decimal:2',
+            'sku.*.quantity' => 'required|integer|min:1',
+            'sku.*.images.*.url' => 'required|file|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ];
     }
 }
